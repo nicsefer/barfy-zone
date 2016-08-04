@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Barfy</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://code.responsivevoice.org/responsivevoice.js"></script>
+    </script>
+  </head>
+
+  <body>
+    <h1>Barfy zone</h1>
+    <audio id="aguanta" preload="true">
+      <source  src="http://barfy.surge.sh/assets/audio/aguanta.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="botellero" preload="true">
+      <source  src="http://barfy.surge.sh/assets/audio/botellero.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="dale-ingrid" preload="true">
+      <source  src="http://barfy.surge.sh/assets/audio/dale-ingrid.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="wololo" preload="true">
+      <source  src="http://barfy.surge.sh/assets/audio/wololo.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="chime-in" preload="true">
+      <source  src="http://barfy.surge.sh/assets/audio/chime-in.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="me-gusta-el-arte" preload="true">
+      <source  src="http://barfy.surge.sh/assets/audio/me-gusta-el-arte.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="me-gusta-liniers" preload="true">
+      <source  src="http://barfy.surge.sh/assets/audio/me-gusta-liniers.mp3" type="audio/mpeg">
+    </audio>
+
+
+    <script type="text/javascript">
+
+    function setupConnection () {
+      var HOST = 'wss://barfy-server.herokuapp.com',
+        ws = new WebSocket(HOST);
+
+      ws.onmessage = function (event) {
+        var data = JSON.parse(event.data),
+          action = data.action,
+          value = data.value,
+          element = $('audio#' + value);
+
+        if (action === 'stop') {
+          $('audio').each(function(i, v) {
+            v.pause();
+            v.currentTime = 0;
+          })
+        }
+
+        if (action === 'announce') {
+          $('audio#chime-in')[0].play();
+          setTimeout(function () {
+            responsiveVoice.speak(value, "Spanish Latin American Female");
+          }, 1900);
+        };
+
+        if(element.length) {
+          element[0].play();
+        }
+      };
+
+      ws.onclose = function (event) {
+        setupConnection();
+      }
+    }
+
+    setupConnection();
+
+    // setTimeInterval(function() {
+    //   $.ajax('')
+    // }, 60 * 5 * 1000);
+
+
+    </script>
+  </body>
+</html>
