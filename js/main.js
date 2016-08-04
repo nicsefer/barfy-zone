@@ -31,28 +31,34 @@ var preloadAudios = function (audios) {
 	});
 };
 
+var playingAudios = [];
+var playAudio = function (name) {
+	var audio = new Audio('/assets/audio/' + name + '.mp3');
+	audio.play();
+	playingAudios.push(audio);
+	audio.addEventListener('ended', function () {
+		var index = playingAudios.indexOf(audio);
+		if (index > -1) {
+			playingAudios.splice(index, 1);
+		}
+	});
+	return audio;
+};
+
 var setupConnection = function () {
 	var HOST = 'wss://barfy-server.herokuapp.com',
 		ws = new WebSocket(HOST);
 
-	ws.onopen = function () {
-		ws.send(JSON.stringify({
-			type: 'handshake',
-			content: audios
-		}));
-	};
-
 	ws.onmessage = function (event) {
 		var data = JSON.parse(event.data),
 			action = data.action,
-			value = data.value,
-			element = $('audio#' + value);
+			value = data.value;
 
 		if (action === 'stop') {
-			$('audio').each(function(i, v) {
+			$('audio').each(function (i, v) {
 				v.pause();
 				v.currentTime = 0;
-			})
+			});
 		}
 
 		if (action === 'announce') {
@@ -60,10 +66,10 @@ var setupConnection = function () {
 			setTimeout(function () {
 				responsiveVoice.speak(value, 'Spanish Latin American Female');
 			}, 1900);
-		};
+		}
 
-		if(element.length) {
-			element[0].play();
+		if (action === 'audio') {
+			playAudio(value);
 		}
 	};
 
