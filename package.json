@@ -1,0 +1,22 @@
+{
+  "name": "barfy-zone",
+  "version": "1.0.1-funnyelephant",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "major": "node versionator.js major;git st;git add --all;git ci -m.;git push;surge .",
+    "minor": "node versionator.js minor;git st;git add --all;git ci -m.;git push;surge .",
+    "patch": "node versionator.js patch;git st;git add --all;git ci -m.;git push;surge ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicsefer/barfy-zone.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nicsefer/barfy-zone/issues"
+  },
+  "homepage": "https://github.com/nicsefer/barfy-zone#readme"
+}
