@@ -33,17 +33,20 @@ var preloadAudios = function (audios) {
 
 var playingAudios = [];
 var playAudio = function (name) {
-	var audio = new Audio('/assets/audio/' + name + '.mp3');
-	audio.play();
-	playingAudios.push(audio);
-	audio.addEventListener('ended', function () {
+		var audio = new Audio('/assets/audio/' + name + '.mp3');
+		audio.play();
+		playingAudios.push(audio);
+		audio.addEventListener('ended', function () {
+			removeAudio(audio);
+		});
+		return audio;
+	},
+	removeAudio = function (audio) {
 		var index = playingAudios.indexOf(audio);
 		if (index > -1) {
 			playingAudios.splice(index, 1);
 		}
-	});
-	return audio;
-};
+	};
 
 var setupConnection = function () {
 	var HOST = 'wss://barfy-server.herokuapp.com',
@@ -55,14 +58,20 @@ var setupConnection = function () {
 			value = data.value;
 
 		if (action === 'stop') {
-			$('audio').each(function (i, v) {
-				v.pause();
-				v.currentTime = 0;
+			var audiosToRemove = [];
+
+			playingAudios.forEach(function (audio) {
+				audio.pause();
+				audio.currentTime = 0;
+				audiosToRemove.push(audio);
+			});
+			audiosToRemove.forEach(function (audio) {
+				removeAudio(audio);
 			});
 		}
 
 		if (action === 'announce') {
-			$('audio#chime-in')[0].play();
+			playAudio('chime-in');
 			setTimeout(function () {
 				responsiveVoice.speak(value, 'Spanish Latin American Female');
 			}, 1900);
