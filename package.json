@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "major": "node versionator.js major;git st;git add --all;git commit -m.;git push;surge .",
-    "minor": "node versionator.js minor;git st;git add --all;git commit -m.;git push;surge .",
-    "patch": "node versionator.js patch;git st;git add --all;git commit -m.;git push;surge ."
+    "addci": "git add --all && git ci -m.",
+    "major": "git st && npm run addci && git pull && node versionator.js major && npm run addci && git push && surge .",
+    "minor": "git st && npm run addci && git pull && node versionator.js minor && npm run addci && git push && surge .",
+    "patch": "git st && npm run addci && git pull && node versionator.js patch && npm run addci && git push && surge ."
   },
   "repository": {
     "type": "git",
