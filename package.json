@@ -1,13 +1,13 @@
 {
   "name": "barfy-zone",
-  "version": "2.2.3-fakerat",
+  "version": "2.2.4-richeagle",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "major": "node versionator.js major;git st;git add --all;git ci -m.;git push;surge .",
-    "minor": "node versionator.js minor;git st;git add --all;git ci -m.;git push;surge .",
-    "patch": "node versionator.js patch;git st;git add --all;git ci -m.;git push;surge ."
+    "major": "node versionator.js major;git st;git add --all;git commit -m.;git push;surge .",
+    "minor": "node versionator.js minor;git st;git add --all;git commit -m.;git push;surge .",
+    "patch": "node versionator.js patch;git st;git add --all;git commit -m.;git push;surge ."
   },
   "repository": {
     "type": "git",
