@@ -1,6 +1,6 @@
 {
   "name": "barfy-zone",
-  "version": "2.2.8-minorhedgehog",
+  "version": "2.2.9-freshcoyote",
   "description": "",
   "main": "index.js",
   "scripts": {
