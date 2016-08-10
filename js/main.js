@@ -19,7 +19,7 @@ setInterval(function () {
 			window.location.reload();
 		}
 	});
-}, 60 * 5 * 1000);
+}, 60 * 1 * 1000);
 
 var getContents = function (cb) {
 	$.getJSON('/contents.json', cb);
