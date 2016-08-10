@@ -48,6 +48,10 @@ var playAudio = function (name) {
 		}
 	};
 
+var playYoutube = function (id) {
+	
+	};
+
 var setupConnection = function () {
 	var HOST = 'wss://barfy-server.herokuapp.com',
 		ws = new WebSocket(HOST);
@@ -79,6 +83,10 @@ var setupConnection = function () {
 
 		if (action === 'audio') {
 			playAudio(value);
+		}
+
+		if (action === 'youtube') {
+			playYoutube(value);
 		}
 	};
 

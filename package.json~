@@ -1,6 +1,10 @@
 {
   "name": "barfy-zone",
+<<<<<<< HEAD
+  "version": "2.0.4-blondsalmon",
+=======
   "version": "2.2.1-loudwolf",
+>>>>>>> c5491169537f629f887b22a2c106b636d143a046
   "description": "",
   "main": "index.js",
   "scripts": {
