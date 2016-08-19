@@ -49,7 +49,7 @@ var playAudio = function (name) {
 	};
 
 var playYoutube = function (id) {
-	
+
 	};
 
 var setupConnection = function () {
@@ -72,6 +72,7 @@ var setupConnection = function () {
 			audiosToRemove.forEach(function (audio) {
 				removeAudio(audio);
 			});
+			playAudio('callate');
 		}
 
 		if (action === 'announce') {
